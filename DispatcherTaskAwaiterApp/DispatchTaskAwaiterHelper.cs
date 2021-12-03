@@ -44,6 +44,11 @@ namespace DispatcherTaskAwaiterApp
       {
         throw new InvalidOperationException("Task is unexpectedly not completed");
       }
+
+      if (_task.IsCanceled)
+      {
+        throw new TaskCanceledException();
+      }
       
       if (_task.Exception != null)
       {
